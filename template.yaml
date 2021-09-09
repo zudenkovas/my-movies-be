@@ -1,8 +1,8 @@
-AWSTemplateFormatVersion: '2010-09-09'
+AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
 Description: >
   my-movies-api
-  
+
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -19,8 +19,8 @@ Resources:
         MyMoviesApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Path: /
-            Method: get
+            Path: /{proxy+}
+            Method: ANY
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
