@@ -50,6 +50,7 @@ bower_components
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 .aws-sam/
+**/dist/
 build/Release
 
 # Dependency directories
