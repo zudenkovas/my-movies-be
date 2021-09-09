@@ -25,7 +25,7 @@ exports.lambdaHandler = async (event, context) => {
                 "Access-Control-Allow-Methods": "*"
             },
             'body': JSON.stringify({
-                message: 'Service is up.',
+                message: 'Service is up',
                 // location: ret.data.trim()
             })
         }
