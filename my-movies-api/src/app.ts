@@ -1,8 +1,15 @@
 import express from 'express';
+import bodyParser from "body-parser";
+import awsServerlessExpressMiddleware from "aws-serverless-express/middleware";
 
+import { CORS } from './commons';
 import movieRoutes from '@/routes/movie.routes';
 
 const app = express();
+
+app.use(bodyParser.json());
+app.use(awsServerlessExpressMiddleware.eventContext());
+app.use(CORS);
 
 app.use('/', (_req: any, res: express.Response) => res.json({ message: 'APIs' }));
 app.use('/movies', movieRoutes);
