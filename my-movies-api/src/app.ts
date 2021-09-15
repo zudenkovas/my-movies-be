@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import awsServerlessExpressMiddleware from "aws-serverless-express/middleware";
 
 import { CORS } from './commons';
-import movieRoutes from '@/routes/movie.routes';
+import movieRoutes from './routes/movie.routes';
 
 const app = express();
 

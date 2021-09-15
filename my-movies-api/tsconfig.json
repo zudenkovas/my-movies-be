@@ -12,17 +12,6 @@
     "strict": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "target": "es6",
-    "paths": {
-      "@/commons/*": [
-        "./src/commons/*"
-      ],
-      "@/controllers/*": [
-        "./src/controllers/*"
-      ],
-      "@/routes/*": [
-        "./src/routes/*"
-      ]
-    },
+    "target": "es6"
   }
 }
