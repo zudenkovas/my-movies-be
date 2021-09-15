@@ -1,11 +1,7 @@
-import express from "express";
+import express from 'express';
 
-export const CORS = (
-  _req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
-): void => {
-  res.header("Access-Control-Allow-Origin", '*');
-  res.header("Access-Control-Allow-Headers", "*");
+export const CORS = (_req: express.Request, res: express.Response, next: express.NextFunction): void => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
   next();
 };

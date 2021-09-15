@@ -5,4 +5,5 @@ import app from './app';
 
 const server = awsServerlessExpress.createServer(app);
 
-export const handler = (event: APIGatewayProxyEvent, context: Context) => awsServerlessExpress.proxy(server, event, context);
+export const handler = (event: APIGatewayProxyEvent, context: Context) =>
+  awsServerlessExpress.proxy(server, event, context);
