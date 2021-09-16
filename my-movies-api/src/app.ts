@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { ErrorRequestHandler } from 'express';
 import bodyParser from 'body-parser';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 
@@ -11,17 +11,19 @@ app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(CORS);
 
-app.use('/', (_req: any, res: express.Response) => res.json({ message: 'APIs' }));
+app.use('/', (_req: express.Request, res: express.Response) => res.json({ message: 'API v2' }));
 app.use('/movies', movieRoutes);
 
-app.use((err: any, _req: express.Request, _res: express.Response, next: express.NextFunction) => {
+const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
   console.error(err.stack);
   next(err);
-});
+};
+app.use(errorLogger);
 
-app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+const errorHandler: ErrorRequestHandler = (err, _req, res) => {
   res.status(500).json({ error: err.errors || err.message || 'Unknown Error' });
-});
+};
+app.use(errorHandler);
 
 app.use((_req: express.Request, res: express.Response) => {
   res.status(404).json({ error: 'Not found' });
