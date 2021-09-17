@@ -15,11 +15,19 @@
     "build": "tsc",
     "eslint": "eslint \"src/**/*.ts\"",
     "eslint:fix": "eslint --fix \"src/**/*.ts\"",
+    "prepare": "cd ../ && husky install ./my-movies-api",
     "prestart": "npm run build",
     "prettier": "prettier \"src/**/*.ts\"",
     "prettier:fix": "prettier --write \"src/**/*.ts\"",
     "start": "node  --es-module-specifier-resolution=node ./dist/app.js",
     "test": "mocha tests/unit/"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "prettier --write",
+      "eslint --format stylish --fix",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@types/aws-lambda": "8.10.83",
@@ -34,6 +42,7 @@
     "eslint-plugin-import": "2.24.2",
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-react": "7.25.1",
+    "husky": "7.0.2",
     "mocha": "6.1.4",
     "prettier": "2.4.0",
     "typescript": "4.4.2"
