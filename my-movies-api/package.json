@@ -24,8 +24,8 @@
   },
   "lint-staged": {
     "*.ts": [
-      "prettier --write",
-      "eslint --format stylish --fix",
+      "npm run prettier:fix",
+      "npm run eslint:fix",
       "git add"
     ]
   },
