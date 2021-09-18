@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(CORS);
 
-app.use('/', (_req: express.Request, res: express.Response) => res.json({ message: 'API v2' }));
+app.use('/', (_req: express.Request, res: express.Response) => res.json({ message: 'API v3' }));
 app.use('/movies', movieRoutes);
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {

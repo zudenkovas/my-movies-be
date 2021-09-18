@@ -16,12 +16,12 @@
     "build": "tsc",
     "eslint": "eslint \"src/**/*.ts\"",
     "eslint:fix": "eslint --fix \"src/**/*.ts\"",
+    "prepare": "husky install",
     "prestart": "npm run build",
     "prettier": "prettier \"src/**/*.ts\"",
     "prettier:fix": "prettier --write \"src/**/*.ts\"",
     "start": "node  --es-module-specifier-resolution=node ./dist/app.js",
-    "test": "mocha tests/unit/",
-    "prepare": "husky install"
+    "test": "mocha tests/unit/"
   },
   "lint-staged": {
     "*.ts": [
