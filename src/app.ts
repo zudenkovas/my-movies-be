@@ -4,7 +4,6 @@ import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 
 import { CORS } from './commons';
 import healthRoutes from './routes/health.routes';
-import movieRoutes from './routes/movie.routes';
 
 const app = express();
 
@@ -13,7 +12,6 @@ app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(CORS);
 
 app.use('/health', healthRoutes);
-app.use('/movies', movieRoutes);
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
   console.error(err.stack);
