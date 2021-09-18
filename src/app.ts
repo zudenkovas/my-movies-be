@@ -13,6 +13,8 @@ app.use(CORS);
 
 app.use('/health', healthRoutes);
 
+// Add movie routes: app.use('/movies', TBD);
+
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
   console.error(err.stack);
   next(err);
