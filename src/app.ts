@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 
 import { CORS } from './commons';
+import healthRoutes from './routes/health.routes';
 import movieRoutes from './routes/movie.routes';
 
 const app = express();
@@ -11,7 +12,8 @@ app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(CORS);
 
-app.use('/', (_req: express.Request, res: express.Response) => res.json({ message: 'API v3' }));
+app.use('/', (_req: express.Request, res: express.Response) => res.json({ message: 'API v4' }));
+app.use('/health', healthRoutes);
 app.use('/movies', movieRoutes);
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
