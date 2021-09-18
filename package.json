@@ -21,7 +21,7 @@
     "prettier:fix": "prettier --write \"src/**/*.ts\"",
     "start": "node  --es-module-specifier-resolution=node ./dist/app.js",
     "test": "mocha tests/unit/",
-    "prepare": "cd .. && husky install ./my-movies-api/.husky"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.ts": [
