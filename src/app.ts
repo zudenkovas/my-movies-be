@@ -12,9 +12,9 @@ app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(CORS);
 
-app.use('/', (_req: express.Request, res: express.Response) => res.json({ message: 'API v4' }));
 app.use('/health', healthRoutes);
 app.use('/movies', movieRoutes);
+app.use('/', (_req: express.Request, res: express.Response) => res.json({ message: 'API v4' }));
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
   console.error(err.stack);
