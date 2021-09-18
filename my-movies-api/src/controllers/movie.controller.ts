@@ -1,6 +1,6 @@
 import express from 'express';
 
-const getMovies = (_req: express.Request, res: any): void => {
+const getMovies = (_req: any, res: any): void => {
   res.json([
     {
       title: 'Movie A',
