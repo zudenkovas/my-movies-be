@@ -31,7 +31,7 @@ app.use((_req: express.Request, res: express.Response) => {
   res.status(404).json({ error: 'Not found' });
 });
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log('Aapplication is started');
 });
 
