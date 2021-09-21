@@ -1,10 +1,13 @@
 import express, { ErrorRequestHandler } from 'express';
 import bodyParser from 'body-parser';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
+import dotenv from 'dotenv';
 
 import { CORS } from './commons';
 import healthRoutes from './routes/health.routes';
 import movieRoutes from './routes/movie.routes';
+
+dotenv.config();
 
 const app = express();
 
