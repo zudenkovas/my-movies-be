@@ -2,14 +2,14 @@ import express, { ErrorRequestHandler } from 'express';
 import bodyParser from 'body-parser';
 import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 
-import { CORS } from './commons';
+import { CORS, isLambdaRuntime } from './commons';
 import healthRoutes from './routes/health.routes';
 
 const app = express();
 
 app.use(bodyParser.json());
 
-if (process.env.AWS_REGION) {
+if (isLambdaRuntime()) {
   console.log('*****************');
   app.use(awsServerlessExpressMiddleware.eventContext());
 }
