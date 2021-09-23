@@ -1,6 +1,5 @@
 import express, { ErrorRequestHandler } from 'express';
 import bodyParser from 'body-parser';
-import awsServerlessExpressMiddleware from 'aws-serverless-express/middleware';
 import dotenv from 'dotenv';
 
 import { CORS } from './commons';
@@ -12,7 +11,6 @@ dotenv.config();
 const app = express();
 
 app.use(bodyParser.json());
-app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(CORS);
 
 app.use('/health', healthRoutes);
