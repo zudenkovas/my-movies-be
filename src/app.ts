@@ -11,6 +11,10 @@ app.use(bodyParser.json());
 app.use(awsServerlessExpressMiddleware.eventContext());
 app.use(CORS);
 
+console.log('---');
+console.log(process.env);
+console.log('---');
+
 app.use('/health', healthRoutes);
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
