@@ -1,39 +1,47 @@
 import axios from 'axios';
 
+import { convertToMovie, convertToMovieDetails } from '../converters/movie.converter';
+
 interface MovieCache {
-  [movieId: number]: Movie;
+  [page: number]: Movie[];
+  totalPages?: number;
+}
+
+interface MovieDetailsCache {
+  [movieId: number]: MovieDetails;
 }
 
 const movies: MovieCache = {};
+const movieDetails: MovieDetailsCache = {};
 
-const convertToMovie = (responseMovie: ResponseMovie): Movie => {
+const loadMovies = async (page = 1): Promise<ResponseMovies> => {
+  if (!movies[page]) {
+    const { data } = await axios.get<TmdbMovies>(
+      `https://api.themoviedb.org/3/trending/movie/week?sort_by=popularity.desc&page=${page}&api_key=${process.env.API_KEY}`,
+    );
+
+    movies[page] = [];
+    movies.totalPages = data.total_pages;
+    data.results.map(convertToMovie).forEach((m) => movies[page].push(m));
+  }
+
   return {
-    id: responseMovie.id,
-    title: responseMovie.title,
-    releaseDate: responseMovie.release_date,
-    originalLanguage: responseMovie.original_language,
-    overview: responseMovie.overview,
-    genreIds: responseMovie.genre_ids,
-    adult: responseMovie.adult,
-    backdropPath: responseMovie.backdrop_path,
-    posterPath: responseMovie.poster_path,
-    voteAverage: responseMovie.vote_average,
-    voteCount: responseMovie.vote_count,
-    popularity: responseMovie.popularity,
+    page,
+    movies: movies[page],
+    totalPages: movies.totalPages || 0,
   };
 };
 
-const loadMovies = async (): Promise<Movie[]> => {
-  if (Object.keys(movies).length === 0) {
-    console.log('aaa');
-    const { data } = await axios.get<Response>(
-      `https://api.themoviedb.org/3/trending/movie/week?sort_by=popularity.desc&api_key=${process.env.API_KEY}`,
+const loadMovie = async (movieId: number): Promise<MovieDetails> => {
+  if (!movieDetails[movieId]) {
+    const { data } = await axios.get<TmdbMovieDetails>(
+      `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`,
     );
 
-    data.results.map(convertToMovie).forEach((m) => (movies[m.id] = m));
+    movieDetails[data.id] = convertToMovieDetails(data);
   }
 
-  return Object.values(movies);
+  return movieDetails[movieId];
 };
 
-export { loadMovies };
+export { loadMovies, loadMovie };
