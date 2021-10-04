@@ -1,5 +1,11 @@
 import axios from 'axios';
 
+interface MovieCache {
+  [movieId: number]: Movie;
+}
+
+const movies: MovieCache = {};
+
 const convertToMovie = (responseMovie: ResponseMovie): Movie => {
   return {
     id: responseMovie.id,
@@ -18,11 +24,16 @@ const convertToMovie = (responseMovie: ResponseMovie): Movie => {
 };
 
 const loadMovies = async (): Promise<Movie[]> => {
-  const { data } = await axios.get<Response>(
-    `https://api.themoviedb.org/3/trending/movie/week?sort_by=popularity.desc&api_key=${process.env.API_KEY}`,
-  );
+  if (Object.keys(movies).length === 0) {
+    console.log('aaa');
+    const { data } = await axios.get<Response>(
+      `https://api.themoviedb.org/3/trending/movie/week?sort_by=popularity.desc&api_key=${process.env.API_KEY}`,
+    );
 
-  return data.results.map(convertToMovie);
+    data.results.map(convertToMovie).forEach((m) => (movies[m.id] = m));
+  }
+
+  return Object.values(movies);
 };
 
 export { loadMovies };
