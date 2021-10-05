@@ -4,7 +4,8 @@ import { loadMovie, loadMovies } from '../services/movie.service';
 
 const getMovies = async (req: express.Request, res: express.Response, next: express.NextFunction): Promise<void> => {
   try {
-    const movies = await loadMovies(parseInt(req.query.page as string));
+    const page = req.query.page ? parseInt(req.query.page as string) : 1;
+    const movies = await loadMovies(page);
     res.json(movies);
   } catch (err) {
     next(err);
