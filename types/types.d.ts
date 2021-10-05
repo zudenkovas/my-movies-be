@@ -13,46 +13,6 @@ interface TmdbMovie {
   vote_average: number;
 }
 
-interface Genre {
-  id: number;
-}
-
-interface TmdbProductionCompany {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: string;
-}
-
-interface ProductionCompany {
-  id: number;
-  logoPath: string;
-  name: string;
-  originCountry: string;
-}
-
-interface TmdbProductionCountry {
-  iso_3166_1: string;
-  name: string;
-}
-
-interface ProductionCountry {
-  iso: string;
-  name: string;
-}
-
-interface TmdbSpokenLanguage {
-  english_name: string;
-  iso_639_1: string;
-  name: string;
-}
-
-interface SpokenLanguage {
-  englishName: string;
-  iso: string;
-  name: string;
-}
-
 interface TmdbMovieDetails extends TmdbMovie {
   budget: number;
   genres: Genre[];
@@ -69,6 +29,46 @@ interface TmdbMovieDetails extends TmdbMovie {
   tagline: string;
   title: string;
   vote_count: number;
+}
+
+interface TmdbProductionCompany {
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
+}
+
+interface TmdbProductionCountry {
+  iso_3166_1: string;
+  name: string;
+}
+
+interface TmdbSpokenLanguage {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
+}
+
+interface Genre {
+  id: number;
+}
+
+interface ProductionCompany {
+  id: number;
+  logoPath: string;
+  name: string;
+  originCountry: string;
+}
+
+interface ProductionCountry {
+  iso: string;
+  name: string;
+}
+
+interface SpokenLanguage {
+  englishName: string;
+  iso: string;
+  name: string;
 }
 
 interface Movie {
@@ -98,7 +98,7 @@ interface MovieDetails extends Movie {
   voteCount: number;
 }
 
-interface ResponseMovies {
+interface Movies {
   page: number;
   totalPages: number;
   movies: Movie[];

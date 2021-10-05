@@ -14,7 +14,7 @@ interface MovieDetailsCache {
 const movies: MovieCache = {};
 const movieDetails: MovieDetailsCache = {};
 
-const loadMovies = async (page = 1): Promise<ResponseMovies> => {
+const loadMovies = async (page = 1): Promise<Movies> => {
   if (!movies[page]) {
     const { data } = await axios.get<TmdbMovies>(
       `https://api.themoviedb.org/3/trending/movie/week?sort_by=popularity.desc&page=${page}&api_key=${process.env.API_KEY}`,
