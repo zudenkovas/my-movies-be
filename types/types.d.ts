@@ -51,6 +51,11 @@ interface TmdbSpokenLanguage {
 
 interface Genre {
   id: number;
+  name: string;
+}
+
+interface Genres {
+  genres: Genre[];
 }
 
 interface ProductionCompany {
