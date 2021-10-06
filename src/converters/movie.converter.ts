@@ -1,10 +1,13 @@
+const IMG_URL_500 = 'https://image.tmdb.org/t/p/w500';
+const IMG_URL_ORIGINAL = 'https://image.tmdb.org/t/p/original';
+
 const convertToMovie = (tmdbMovie: TmdbMovie): Movie => {
   return {
     id: tmdbMovie.id,
     title: tmdbMovie.title,
     releaseDate: tmdbMovie.release_date,
-    backdropPath: tmdbMovie.backdrop_path,
-    posterPath: tmdbMovie.poster_path,
+    backdropPath: IMG_URL_500 + tmdbMovie.backdrop_path,
+    posterPath: IMG_URL_500 + tmdbMovie.poster_path,
     voteAverage: tmdbMovie.vote_average,
   };
 };
@@ -36,12 +39,14 @@ const convertToSpokenLanguage = (tmdbSpokenLanguage: TmdbSpokenLanguage): Spoken
 const convertToMovieDetails = (tmdbMovieDetails: TmdbMovieDetails): MovieDetails => {
   return {
     ...convertToMovie(tmdbMovieDetails),
+    backdropPath: IMG_URL_ORIGINAL + tmdbMovieDetails.backdrop_path,
     budget: tmdbMovieDetails.budget,
     genres: tmdbMovieDetails.genres,
     homepage: tmdbMovieDetails.homepage,
     originalLanguage: tmdbMovieDetails.original_language,
     originalTitle: tmdbMovieDetails.original_title,
     overview: tmdbMovieDetails.overview,
+    posterPath: IMG_URL_ORIGINAL + tmdbMovieDetails.poster_path,
     productionCompanies: tmdbMovieDetails.production_companies.map(convertToProductionCompany),
     productionCountries: tmdbMovieDetails.production_countries.map(convertToProductionCountry),
     revenue: tmdbMovieDetails.revenue,
