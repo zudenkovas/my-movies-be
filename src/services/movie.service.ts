@@ -17,7 +17,7 @@ const movieDetails: MovieDetailsCache = {};
 const loadMovies = async (page: number): Promise<Movies> => {
   if (!movies[page]) {
     const { data } = await axios.get<TmdbMovies>(
-      `https://api.themoviedb.org/3/trending/movie/week?sort_by=popularity.desc&page=${page}&api_key=${process.env.API_KEY}`,
+      `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=${page}&api_key=${process.env.API_KEY}`,
     );
 
     movies[page] = [];
@@ -29,6 +29,33 @@ const loadMovies = async (page: number): Promise<Movies> => {
     page,
     movies: movies[page],
     totalPages: movies.totalPages || 0,
+  };
+};
+
+const searchMovies = async (page: number, withGenres?: string, sortBy?: string): Promise<Movies> => {
+  const sort = sortBy || 'popularity.desc';
+  const genres = withGenres || '';
+
+  const { data } = await axios.get<TmdbMovies>(
+    `https://api.themoviedb.org/3/discover/movie?sort_by=${sort}&with_genres=${genres}&page=${page}&api_key=${process.env.API_KEY}`,
+  );
+
+  return {
+    page,
+    movies: data.results.map(convertToMovie),
+    totalPages: data.total_pages,
+  };
+};
+
+const searchMoviesByTitle = async (page: number, title: string): Promise<Movies> => {
+  const { data } = await axios.get<TmdbMovies>(
+    `https://api.themoviedb.org/3/search/movie?query=${title}&page=${page}&api_key=${process.env.API_KEY}`,
+  );
+
+  return {
+    page,
+    movies: data.results.map(convertToMovie),
+    totalPages: data.total_pages,
   };
 };
 
@@ -44,4 +71,4 @@ const loadMovie = async (movieId: number): Promise<MovieDetails> => {
   return movieDetails[movieId];
 };
 
-export { loadMovies, loadMovie };
+export { loadMovies, loadMovie, searchMovies, searchMoviesByTitle };

@@ -108,3 +108,8 @@ interface Movies {
   totalPages: number;
   movies: Movie[];
 }
+
+interface SortOption {
+  code: string;
+  name: string;
+}

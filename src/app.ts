@@ -6,6 +6,7 @@ import { CORS } from './commons';
 import healthRoutes from './routes/health.routes';
 import genreRoutes from './routes/genre.routes';
 import movieRoutes from './routes/movie.routes';
+import sortOptionRoutes from './routes/sort-option.routes';
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.use(CORS);
 app.use('/health', healthRoutes);
 app.use('/genres', genreRoutes);
 app.use('/movies', movieRoutes);
+app.use('/sort-options', sortOptionRoutes);
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
   console.error(err.stack);
