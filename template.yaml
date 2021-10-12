@@ -7,9 +7,6 @@ Parameters:
   AppSecret:
     Description: "AppSecret"
     Type: "String"
-  MongoUrl:
-    Description: "MongoUrl"
-    Type: "String"
 Description: >
   my-movies-api
 
@@ -29,7 +26,6 @@ Resources:
         Variables:
           API_KEY: !Ref ApiKey
           APP_SECRET: !Ref AppSecret
-          MONGO_URL: !Ref MongoUrl
       Events:
         MyMoviesApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
