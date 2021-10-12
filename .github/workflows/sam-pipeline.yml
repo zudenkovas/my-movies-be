@@ -19,4 +19,4 @@ jobs:
       # Run Unit tests- Specify unit tests here
 
       # sam deploy
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-my-movies-api --s3-bucket ${{ secrets.AWS_S3_BUCKET_NAME }} --capabilities CAPABILITY_IAM --region eu-central-1 --parameter-overrides ParameterKey=API_KEY,ParameterValue=${{ secrets.API_KEY }} ParameterKey=APP_SECRET,ParameterValue=${{ secrets.APP_SECRET }} ParameterKey=MONGO_URL,ParameterValue=${{ secrets.MONGO_URL }}
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-my-movies-api --s3-bucket ${{ secrets.AWS_S3_BUCKET_NAME }} --capabilities CAPABILITY_IAM --region eu-central-1 --parameter-overrides ParameterKey=API_KEY,ParameterValue=${{ secrets.API_KEY }} ParameterKey=APP_SECRET,ParameterValue=${{ secrets.APP_SECRET }}

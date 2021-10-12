@@ -7,11 +7,6 @@ Description: >
 Globals:
   Function:
     Timeout: 3
-    Environment:
-      Variables:
-        API_KEY: !Ref API_KEY
-        APP_SECRET: !Ref APP_SECRET
-        MONGO_URL: !Ref MONGO_URL
 
 Resources:
   MyMoviesApiFunction:
@@ -20,6 +15,10 @@ Resources:
       CodeUri: ./
       Handler: lambda.handler
       Runtime: nodejs14.x
+      Environment:
+        Variables:
+          API_KEY: !Ref API_KEY
+          APP_SECRET: !Ref APP_SECRET
       Events:
         MyMoviesApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
