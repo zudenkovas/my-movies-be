@@ -1,5 +1,15 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Transform: AWS::Serverless-2016-10-31
+Parameters:
+  API_KEY:
+    Description: "API_KEY"
+    Type: "String"
+  API_SECRET:
+    Description: "API_SECRET"
+    Type: "String"
+  MONGO_URL:
+    Description: "MONGO_URL"
+    Type: "String"
 Description: >
   my-movies-api
 
@@ -17,7 +27,9 @@ Resources:
       Runtime: nodejs14.x
       Environment:
         Variables:
-          MyParam: !Ref MyParam
+          API_KEY: !Ref API_KEY
+          APP_SECRET: !Ref APP_SECRET
+          MONGO_URL: !Ref MONGO_URL
       Events:
         MyMoviesApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
