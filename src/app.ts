@@ -1,23 +1,39 @@
-import express, { ErrorRequestHandler } from 'express';
-import bodyParser from 'body-parser';
+import express, { ErrorRequestHandler, json } from 'express';
 import dotenv from 'dotenv';
+import helmet from 'helmet';
+import mongoose, { ConnectOptions } from 'mongoose';
+import sanitize from 'express-mongo-sanitize';
 
 import { CORS } from './commons';
 import healthRoutes from './routes/health.routes';
 import genreRoutes from './routes/genre.routes';
 import movieRoutes from './routes/movie.routes';
+import personalMovieRoutes from './routes/personal-movie.routes';
+import securityRoutes from './routes/security.routes';
 import sortOptionRoutes from './routes/sort-option.routes';
 
 dotenv.config();
 
+const mongoUrl = process.env.MONGO_URL || 'UNDEFINED';
+const options: ConnectOptions = {
+  user: process.env.MONGO_USER,
+  pass: process.env.MONGO_PASS,
+  keepAlive: true,
+};
+mongoose.connect(mongoUrl, options);
+
 const app = express();
 
-app.use(bodyParser.json());
+app.use(helmet());
+app.use(json());
 app.use(CORS);
+app.use(sanitize());
 
+app.use('/', securityRoutes);
 app.use('/health', healthRoutes);
 app.use('/genres', genreRoutes);
 app.use('/movies', movieRoutes);
+app.use('/personal-movies', personalMovieRoutes);
 app.use('/sort-options', sortOptionRoutes);
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {

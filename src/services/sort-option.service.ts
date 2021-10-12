@@ -1,4 +1,4 @@
-const loadSortOptions = (): SortOption[] => {
+const getSortOptions = (): SortOption[] => {
   return [
     {
       code: 'original_title.desc',
@@ -19,4 +19,4 @@ const loadSortOptions = (): SortOption[] => {
   ];
 };
 
-export { loadSortOptions };
+export { getSortOptions };

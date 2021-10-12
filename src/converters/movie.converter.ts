@@ -3,7 +3,7 @@ const IMG_URL_ORIGINAL = 'https://image.tmdb.org/t/p/original';
 
 const convertToMovie = (tmdbMovie: TmdbMovie): Movie => {
   return {
-    id: tmdbMovie.id,
+    movieId: tmdbMovie.id,
     title: tmdbMovie.title,
     releaseDate: tmdbMovie.release_date,
     backdropPath: IMG_URL_500 + tmdbMovie.backdrop_path,

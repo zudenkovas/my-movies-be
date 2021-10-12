@@ -1,3 +1,11 @@
+declare global {
+  namespace Express {
+    interface Request {
+      currentUserEmail: string;
+    }
+  }
+}
+
 interface TmdbMovies {
   page: number;
   total_pages: number;
@@ -77,7 +85,9 @@ interface SpokenLanguage {
 }
 
 interface Movie {
-  id: number;
+  id?: string;
+  email?: string;
+  movieId: number;
   title: string;
   releaseDate: string;
   backdropPath: string;
@@ -112,4 +122,25 @@ interface Movies {
 interface SortOption {
   code: string;
   name: string;
+}
+
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
+interface UserLogin {
+  email: string;
+  password: string;
+}
+
+interface AccessToken {
+  token: string;
+}
+
+interface PaginatedMovies {
+  docs: Movie[];
+  totalPages: number;
 }

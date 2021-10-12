@@ -14,10 +14,10 @@ interface MovieDetailsCache {
 const movies: MovieCache = {};
 const movieDetails: MovieDetailsCache = {};
 
-const loadMovies = async (page: number): Promise<Movies> => {
+const getMovies = async (page: number): Promise<Movies> => {
   if (!movies[page]) {
     const { data } = await axios.get<TmdbMovies>(
-      `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=${page}&api_key=${process.env.API_KEY}`,
+      `https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page=${page}&vote_count.gte=1000&api_key=${process.env.API_KEY}`,
     );
 
     movies[page] = [];
@@ -37,7 +37,7 @@ const searchMovies = async (page: number, withGenres?: string, sortBy?: string):
   const genres = withGenres || '';
 
   const { data } = await axios.get<TmdbMovies>(
-    `https://api.themoviedb.org/3/discover/movie?sort_by=${sort}&with_genres=${genres}&page=${page}&api_key=${process.env.API_KEY}`,
+    `https://api.themoviedb.org/3/discover/movie?sort_by=${sort}&with_genres=${genres}&page=${page}&vote_count.gte=1000&api_key=${process.env.API_KEY}`,
   );
 
   return {
@@ -59,7 +59,7 @@ const searchMoviesByTitle = async (page: number, title: string): Promise<Movies>
   };
 };
 
-const loadMovie = async (movieId: number): Promise<MovieDetails> => {
+const getMovie = async (movieId: number): Promise<MovieDetails> => {
   if (!movieDetails[movieId]) {
     const { data } = await axios.get<TmdbMovieDetails>(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_KEY}`,
@@ -71,4 +71,4 @@ const loadMovie = async (movieId: number): Promise<MovieDetails> => {
   return movieDetails[movieId];
 };
 
-export { loadMovies, loadMovie, searchMovies, searchMoviesByTitle };
+export { getMovies, getMovie, searchMovies, searchMoviesByTitle };
