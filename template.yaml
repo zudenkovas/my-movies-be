@@ -4,12 +4,6 @@ Parameters:
   API_KEY:
     Description: "API_KEY"
     Type: "String"
-  API_SECRET:
-    Description: "API_SECRET"
-    Type: "String"
-  MONGO_URL:
-    Description: "MONGO_URL"
-    Type: "String"
 Description: >
   my-movies-api
 
