@@ -7,6 +7,11 @@ Description: >
 Globals:
   Function:
     Timeout: 3
+    Environment:
+      Variables:
+        API_KEY: !Ref API_KEY
+        APP_SECRET: !Ref APP_SECRET
+        MONGO_URL: !Ref MONGO_URL
 
 Resources:
   MyMoviesApiFunction:

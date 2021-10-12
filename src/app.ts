@@ -1,7 +1,7 @@
 import express, { ErrorRequestHandler, json } from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
-import mongoose, { ConnectOptions } from 'mongoose';
+import mongoose from 'mongoose';
 import sanitize from 'express-mongo-sanitize';
 
 import { CORS } from './commons';
@@ -14,13 +14,13 @@ import sortOptionRoutes from './routes/sort-option.routes';
 
 dotenv.config();
 
-const mongoUrl = process.env.MONGO_URL || 'UNDEFINED';
-const options: ConnectOptions = {
-  user: process.env.MONGO_USER,
-  pass: process.env.MONGO_PASS,
-  keepAlive: true,
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const connectionOptions: any = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 };
-mongoose.connect(mongoUrl, options);
+const mongoUri = process.env.MONGO_URL || 'UNDEFINED';
+mongoose.connect(mongoUri, connectionOptions);
 
 const app = express();
 
