@@ -1,10 +1,9 @@
 import express, { ErrorRequestHandler, json } from 'express';
 import dotenv from 'dotenv';
 import helmet from 'helmet';
-import mongoose from 'mongoose';
 import sanitize from 'express-mongo-sanitize';
 
-import { CORS } from './commons';
+import { connectToMongoDb, CORS, isLambdaRuntime } from './commons';
 import healthRoutes from './routes/health.routes';
 import genreRoutes from './routes/genre.routes';
 import movieRoutes from './routes/movie.routes';
@@ -14,13 +13,9 @@ import sortOptionRoutes from './routes/sort-option.routes';
 
 dotenv.config();
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const connectionOptions: any = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-};
-const mongoUri = process.env.MONGO_URL || 'UNDEFINED';
-mongoose.connect(mongoUri, connectionOptions);
+if (!isLambdaRuntime()) {
+  connectToMongoDb();
+}
 
 const app = express();
 
