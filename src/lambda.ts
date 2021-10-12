@@ -3,6 +3,9 @@ import { Server } from 'http';
 import awsServerlessExpress from 'aws-serverless-express';
 
 import app from './app';
+import { connectToMongoDb } from './commons';
+
+connectToMongoDb();
 
 const server = awsServerlessExpress.createServer(app);
 
