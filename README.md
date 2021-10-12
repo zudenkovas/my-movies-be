@@ -25,7 +25,7 @@ Execute this command in terminal (cmd):
 ```
 npm start
 ```
-**Notes**: after any code changes you should restart application.
+**Notes**: after any code changes you should restart the application.
 
 ## Stop the application
 
