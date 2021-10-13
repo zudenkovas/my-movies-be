@@ -25,5 +25,5 @@ export const validate = (validations: ValidationChain[]) => {
 export const isLambdaRuntime = (): boolean => !!process.env.AWS_LAMBDA_FUNCTION_NAME;
 
 export const connectToMongoDb = (): void => {
-  // The implementation will appear with story:
+  // The implementation will appear later
 };
