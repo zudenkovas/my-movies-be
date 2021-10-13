@@ -1,11 +1,3 @@
-declare global {
-  namespace Express {
-    interface Request {
-      currentUserEmail: string;
-    }
-  }
-}
-
 interface TmdbMovies {
   page: number;
   total_pages: number;

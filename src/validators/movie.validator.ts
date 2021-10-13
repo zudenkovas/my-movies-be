@@ -1,5 +1,5 @@
-import { param } from 'express-validator/check';
+import { body } from 'express-validator';
 
-const movieRules = [param('page').isNumeric()];
+const movieRules = [body('movieId').isNumeric(), body('title').trim().not().isEmpty(), body('releaseDate').isDate()];
 
 export { movieRules };

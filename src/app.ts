@@ -39,8 +39,7 @@ app.use(errorLogger);
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
-  const status = err.errors ? 400 : 500;
-  res.status(status).json({ error: err.errors || err.message || 'Unknown Error' });
+  res.status(500).json({ error: err.errors || err.message || 'Unknown Error' });
 };
 app.use(errorHandler);
 
