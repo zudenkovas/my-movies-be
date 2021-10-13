@@ -5,11 +5,6 @@ import sanitize from 'express-mongo-sanitize';
 
 import { connectToMongoDb, CORS, isLambdaRuntime } from './commons';
 import healthRoutes from './routes/health.routes';
-import genreRoutes from './routes/genre.routes';
-import movieRoutes from './routes/movie.routes';
-import personalMovieRoutes from './routes/personal-movie.routes';
-import securityRoutes from './routes/security.routes';
-import sortOptionRoutes from './routes/sort-option.routes';
 
 dotenv.config();
 
@@ -24,12 +19,7 @@ app.use(json());
 app.use(CORS);
 app.use(sanitize());
 
-app.use('/', securityRoutes);
 app.use('/health', healthRoutes);
-app.use('/genres', genreRoutes);
-app.use('/movies', movieRoutes);
-app.use('/personal-movies', personalMovieRoutes);
-app.use('/sort-options', sortOptionRoutes);
 
 const errorLogger: ErrorRequestHandler = (err, _req, _res, next) => {
   console.error(err.stack);
@@ -48,7 +38,7 @@ app.use((_req: express.Request, res: express.Response) => {
 });
 
 app.listen(3001, () => {
-  console.log('Aapplication is started');
+  console.log('Aapplication started');
 });
 
 export default app;
