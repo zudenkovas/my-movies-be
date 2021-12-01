@@ -19,9 +19,12 @@ This project contains source code and supporting files for My Movies application
 - tsconfig.json - A file that defines options for TypeScript compiliation.
 
 ## Start the application
+Before starting application - make sure all project dependencies are installed:
+```
+npm install
+```
 
 Execute this command in terminal (cmd):
-
 ```
 npm start
 ```
