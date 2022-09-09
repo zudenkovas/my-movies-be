@@ -37,8 +37,10 @@ app.use((_req: express.Request, res: express.Response) => {
   res.status(404).json({ error: 'Not found' });
 });
 
-app.listen(3001, () => {
-  console.log('Aapplication started');
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(3001, () => {
+    console.log('Application started');
+  });
+}
 
 export default app;
