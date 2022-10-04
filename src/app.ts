@@ -8,7 +8,7 @@ import healthRoutes from './routes/health.routes';
 
 dotenv.config();
 
-if (!isLambdaRuntime()) {
+if (!isLambdaRuntime() && process.env.NODE_ENV !== 'test') {
   connectToMongoDb();
 }
 
